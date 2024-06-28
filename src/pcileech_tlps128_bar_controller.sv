@@ -1230,7 +1230,9 @@ module pcileech_bar_impl_ar9287_wifi(
                 16'h3FF8 : rd_rsp_data <= 32'h0000001F;
                 16'h3FFC : rd_rsp_data <= 32'h0000001F;
                 default : rd_rsp_data <= 32'h00000000;
-				            endcase
+                    endcase
+                end
+            endcase
         end else if (dwr_valid) begin
              case (({dwr_addr[31:24], dwr_addr[23:16], dwr_addr[15:08], dwr_addr[07:00]} - (base_address_register & ~32'h4)) & 32'h00FF) //
             endcase
@@ -1243,4 +1245,3 @@ module pcileech_bar_impl_ar9287_wifi(
     end
 
 endmodule
-
