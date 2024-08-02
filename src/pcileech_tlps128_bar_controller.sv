@@ -894,7 +894,7 @@ module pcileech_bar_impl_I225(
 		
         16'h0E00 : begin rd_rsp_data <= 32'h00840827; end
         16'h0E0C : begin rd_rsp_data <= 32'h00000083; end
-		defaut : rd_rsp_data <= 32'h00000000
+		default : rd_rsp_data <= 32'h00000000
     endcase
         end else if (dwr_valid) begin
              case (({dwr_addr[31:24], dwr_addr[23:16], dwr_addr[15:08], dwr_addr[07:00]} - (base_address_register & ~32'h4)) & 32'h00FF) //
