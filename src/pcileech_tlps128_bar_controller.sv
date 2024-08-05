@@ -848,43 +848,40 @@ module pcileech_bar_impl_I225(
         rd_rsp_valid    <= drd_req_valid;
         dwr_addr        <= wr_addr;
         dwr_data        <= wr_data;
-		
-        if (drd_req_valid) begin
-            case (drd_req_addr[15:0] - { base_address_register[15:3], 3'b00})
-			
-			if (drd_req_valid) begin
-    case (drd_req_addr[15:0] - { base_address_register[15:3], 3'b000 })
-        16'h0000 : begin rd_rsp_data <= 32'h581C0641; end
-        16'h0004 : begin rd_rsp_data <= 32'h581C0641; end
-        16'h0008 : begin rd_rsp_data <= 32'h04082840; end
-        16'h0010 : begin rd_rsp_data <= 32'h10000040; end
-        16'h001C : begin rd_rsp_data <= 32'h000A0042; end
-        16'h0028 : begin rd_rsp_data <= 32'h00C28001; end
-        16'h002C : begin rd_rsp_data <= 32'h00000100; end
-        16'h0030 : begin rd_rsp_data <= 32'h00008808; end
-        16'h0038 : begin rd_rsp_data <= 32'h00008100; end
-        16'h00C4 : begin rd_rsp_data <= 32'h00008100; end
-        16'h00D0 : begin rd_rsp_data <= 32'h4044000C; end
-        16'h00D8 : begin rd_rsp_data <= 32'h4044000C; end
-        16'h0100 : begin rd_rsp_data <= 32'h04408002; end
-        16'h0118 : begin rd_rsp_data <= 32'h00004000; end
-        16'h0160 : begin rd_rsp_data <= 32'h0000E660; end
-        16'h0168 : begin rd_rsp_data <= 32'h0000CCC0; end
-        16'h0170 : begin rd_rsp_data <= 32'h00000680; end
-        16'h0200 : begin rd_rsp_data <= 32'h00010000; end
-        16'h0404 : begin rd_rsp_data <= 32'h00010840; end
-        16'h0410 : begin rd_rsp_data <= 32'h00601008; end
-        16'h041C : begin rd_rsp_data <= 32'h00000003; end
-        16'h0428 : begin rd_rsp_data <= 32'h00004000; end
-        16'h0448 : begin rd_rsp_data <= 32'h00002000; end
-        16'h0600 : begin rd_rsp_data <= 32'h00000001; end
-		16'h0604 : begin
+
+	if (drd_req_valid) begin			
+        case (drd_req_addr[15:0] - { base_address_register[15:3], 3'b000 })
+            16'h0000 : begin rd_rsp_data <= 32'h581C0641; end
+            16'h0004 : begin rd_rsp_data <= 32'h581C0641; end
+            16'h0008 : begin rd_rsp_data <= 32'h04082840; end
+            16'h0010 : begin rd_rsp_data <= 32'h10000040; end
+            16'h001C : begin rd_rsp_data <= 32'h000A0042; end
+            16'h0028 : begin rd_rsp_data <= 32'h00C28001; end
+            16'h002C : begin rd_rsp_data <= 32'h00000100; end
+            16'h0030 : begin rd_rsp_data <= 32'h00008808; end
+            16'h0038 : begin rd_rsp_data <= 32'h00008100; end
+            16'h00C4 : begin rd_rsp_data <= 32'h00008100; end
+            16'h00D0 : begin rd_rsp_data <= 32'h4044000C; end
+            16'h00D8 : begin rd_rsp_data <= 32'h4044000C; end
+            16'h0100 : begin rd_rsp_data <= 32'h04408002; end
+            16'h0118 : begin rd_rsp_data <= 32'h00004000; end
+            16'h0160 : begin rd_rsp_data <= 32'h0000E660; end
+            16'h0168 : begin rd_rsp_data <= 32'h0000CCC0; end
+            16'h0170 : begin rd_rsp_data <= 32'h00000680; end
+            16'h0200 : begin rd_rsp_data <= 32'h00010000; end
+            16'h0404 : begin rd_rsp_data <= 32'h00010840; end
+            16'h0410 : begin rd_rsp_data <= 32'h00601008; end
+            16'h041C : begin rd_rsp_data <= 32'h00000003; end
+            16'h0428 : begin rd_rsp_data <= 32'h00004000; end
+            16'h0448 : begin rd_rsp_data <= 32'h00002000; end
+            16'h0600 : begin rd_rsp_data <= 32'h00000001; end
+            16'h0604 : begin
 								rd_rsp_data[7:0]   <= 8'h00;  // mac prefix <- changed to intel 
 								rd_rsp_data[15:8]  <= 8'h02;  // mac prefix <- changed to intel 
 								rd_rsp_data[23:16] <= 8'hB3;  // mac prefix
                                 rd_rsp_data[31:24] <= ((0 + (number + `MAC_RANDOM_NUM1) % (15 + 1 - 0)) << 4) | (0 + (number + `MAC_RANDOM_NUM2) % (15 + 1 - 0)); 
 							end 
-		16'h0608 : begin 
+		  16'h0608 : begin 
 							   rd_rsp_data[7:0]   <= ((0 + (number + `MAC_RANDOM_NUM3) % (15 + 1 - 0)) << 4) | (0 + (number + `MAC_RANDOM_NUM6) % (15 + 1 - 0));
                                rd_rsp_data[15:8]  <= ((0 + (number + `MAC_RANDOM_NUM5) % (15 + 1 - 0)) << 4) | (0 + (number + `MAC_RANDOM_NUM6) % (15 + 1 - 0));
                                rd_rsp_data[31:16] <= 16'h0604;
@@ -894,8 +891,7 @@ module pcileech_bar_impl_I225(
 		
         16'h0E00 : begin rd_rsp_data <= 32'h00840827; end
         16'h0E0C : begin rd_rsp_data <= 32'h00000083; end
-		default : rd_rsp_data <= 32'h00000000
-    endcase
+		default : rd_rsp_data <= 32'h00000000; endcase
         end else if (dwr_valid) begin
              case (({dwr_addr[31:24], dwr_addr[23:16], dwr_addr[15:08], dwr_addr[07:00]} - (base_address_register & ~32'h4)) & 32'h00FF) //
             endcase
